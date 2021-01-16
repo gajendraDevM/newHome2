@@ -14,12 +14,12 @@ const employee = require('./server/router/employee')
 
 dotenv.config()
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === process.env.NODE_ENV) {
     app.use(morgan('dev'))
   }
 
 
-  mongoose.connect('mongodb+srv://gajendra:gajahsn94@cluster0.v3e8e.mongodb.net/newhome?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
+  mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
     console.log('mongodb connected sucessfully')
 })
 
@@ -39,7 +39,7 @@ app.use(cookieSession({
 
 
 
-const port = 5000
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+
+app.listen(process.env.PORT, () => {
+  console.log(`success`)
 })
