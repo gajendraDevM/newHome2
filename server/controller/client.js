@@ -96,3 +96,20 @@ exports.deleteClient = async (req, res)=>{
     }
 
 }
+
+exports.deleteManyClient = async (req, res)=>{
+    try {
+    const client = await Client.deleteMany({
+        _id: {
+          $in: req.body
+        }
+      },);
+
+        res.status(201).json({msg:"deleted succefully"})
+
+    } catch (error) {
+            res.status(401).json({msg:"somthing went Wrong !", error})
+    
+    }
+
+}

@@ -8,11 +8,13 @@ exports.createEmployee = async (req, res)=>{
 
     try {
     
-  
+  console.log(req.body);
 
-    //    new Employee(req.body).save()
+      const employee =   new Employee(req.body);
+
+      await employee.save()
         
-        res.status(201).json({msg:"succefully Employee added"})
+        res.status(201).json({msg:"succefully Employee added", employee})
 
     } catch (error) {
             res.status(401).json({msg:"somthing went Wrong !", error})
@@ -42,14 +44,29 @@ exports.updateEmployee = async (req, res)=>{
 
 
 exports.getAllEmployees = async (req, res)=>{
-    try {
-    
-      const Employee =  await Employee.find({});
 
-        res.status(201).json(Employee)
+    let search = req.query.search
+
+    try {
+
+        if(req.query.search) {
+
+ 
+            const employee =  await Employee.find({$or: [{client_name:{$regex:search,$options:'i'}},
+            {email:{$regex:search,$options:'i'}}, {phone_number:{$regex:search,$options:'i'}}  ]})
+           
+               return res.status(201).json(employee)
+           
+           }
+
+
+    
+      const employee =  await Employee.find({});
+
+        res.status(201).json(employee)
 
     } catch (error) {
-            res.status(401).json({msg:"somthing went Wrong !"})
+            res.status(401).json({msg:"somthing went Wrong !", error})
     
     }
 
@@ -85,22 +102,21 @@ exports.deleteEmployee = async (req, res)=>{
 
 }
 
+exports.deleteManyEmployee = async (req, res)=>{
 
+    try {
+     await Employee.deleteMany({
+        _id: {
+          $in: req.body
+        }
+      },);
 
-// exports.UploadImage = async (req, res)=>{
+        res.status(201).json({msg:"deleted succefully"})
 
+    } catch (error) {
 
-
-
-//     try {
+      res.status(401).json({msg:"somthing went Wrong !", error})
     
-//         // cloudinary.uploader.upload("my_image.jpg", function(error, result) {console.log(result, error)});
+    }
 
-//         res.status(201).json({msg:"upload succefully"})
-
-//     } catch (error) {
-//             res.status(401).json({msg:"somthing went Wrong !"})
-    
-//     }
-
-// }
+}
