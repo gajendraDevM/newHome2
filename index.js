@@ -8,6 +8,8 @@ const cookieSession = require('cookie-session');
 const admin = require('./server/router/admin')
 const client = require('./server/router/client')
 const employee = require('./server/router/employee')
+const property = require('./server/router/property')
+const settingproperty = require('./server/router/settingProperty')
 
 
 
@@ -35,8 +37,8 @@ app.use(cookieSession({
    app.use('/api', admin)
    app.use('/api', client)
    app.use('/api', employee)
-
-
+   app.use('/api', property)
+   app.use('/api', settingproperty)
 
 
 
