@@ -42,7 +42,8 @@ exports.getAllPropertys = async (req, res)=>{
 
 
     let search = req.query.search
-    let filterword = req.query.filterword.toLowerCase().trim()
+    // let filterword = req.query.filterword.toLowerCase().trim()
+    let filterword = req.query.filterword.trim()
 
 
 
