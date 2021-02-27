@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const propertySchema = new Schema({
 
-    property_name: {
+    project_name: {
 
         type: String,
         trim: true,
@@ -16,7 +16,13 @@ owner_info :{
 
     phone_number:String,
     email:String,
+    land_mark:String,
+    owner_locality:String,
+    phone_number:String,
     address:String,
+    service_charges:Number,
+    keys:Number,
+    key_relation:String,
     other_address: [String],
     contact_by:{ type: String, lowercase: true, trim: true },
     other_phone:{
@@ -54,21 +60,62 @@ owner_info :{
         balconies:Number,
         store_room: Number,
         sale_type:String,
-        construction_status:String
+        construction_status:String,
+        build_effeciency:String,
+        builtup_area:String,
+        deposit:String,
+        escalation:String,
+        lock_in:String,
+        notice_period:String,
+        offered_area:String,
+        power:String,
+        property_age:String,
+        property_facing:String,
+        rent:String,
+        rent_free_period:String,
+        sale_type:String,
+        site_area:String,
+
+        total_floor:String,
+        water:String,
+       
+
    
     },
 
     property_type:{
 
-        property_catagory:String,
-        property_type_info:String
+        property_catagory:{type:String, default:'yes'},
+        property_type_info:{type:String, default:'yes'},
+        power_type:{type:String, default:'yes'},
+        corner_type:{type:String, default:'yes'},
+        client_catagory:{type:String, default:'yes'},
+        Signage:{type:String, default:'yes'},
+        vastu:{type:String, default:'yes'},
+
+
+    },
+    furnished_info: {
+        
+        furnished_status:String,
+        discussion_room:Number,
+        conference_room:Number,
+        training_room:Number,
+        board_room:Number,
+        electrical_room:Number,
+        server_room:Number,
+        EPABX:String,
+        project_head:String,
+        airconditioning:String,
+        pantry:String,
+        date_of_furnishing:String
 
     },
  
 
     price_info:{
 
-       total_price:Number,
+        project_price:Number,
        unit:String,
        inSqft:{
 
@@ -82,7 +129,7 @@ owner_info :{
 
     description:{
         type:String,
-        default:true
+        default:null
         
     },
 

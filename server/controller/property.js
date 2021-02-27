@@ -5,10 +5,11 @@ exports.createProperty = async (req, res)=>{
     try {
     
 
+    const property =   new Property(req.body)
 
-       new Property(req.body).save()
+    await property.save()
         
-        res.status(201).json({msg:"succefully Property added"})
+        res.status(201).json({msg:"succefully Property added", property})
 
     } catch (error) {
             res.status(401).json({msg:"somthing went Wrong !"})
