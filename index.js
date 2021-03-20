@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === process.env.NODE_ENV) {
   }
 
 
-  mongoose.connect(process.env.LOCAL_DB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
+  mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
     console.log('mongodb connected sucessfully')
 })
 
