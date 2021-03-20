@@ -6,12 +6,15 @@ exports.createProperty = async (req, res)=>{
     
 
     const property =   new Property(req.body)
+    property.property_info.project_price = req.body.property_info.project_price 
+    property.property_info.price_unit =   req.body.prefix;
 
     await property.save()
         
         res.status(201).json({msg:"succefully Property added", property})
 
     } catch (error) {
+        console.log(error);
             res.status(401).json({msg:"somthing went Wrong !"})
     
     }
@@ -65,7 +68,7 @@ if(req.query.search) {
 if(filterword !== "null" ){
    
 
-const property =  await Property.find({'owner_info.contact_by':filterword});
+const property =  await Property.find({'property_type.property_catagory':filterword});
 
       return  res.status(201).json(property)
     

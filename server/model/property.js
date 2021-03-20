@@ -48,6 +48,9 @@ owner_info :{
 
     property_info: {
 
+        project_price:Number,
+        price_unit:String,
+     
         super_area: String,
         status:String,
         transection_type:String,
@@ -113,19 +116,6 @@ owner_info :{
     },
  
 
-    price_info:{
-
-        project_price:Number,
-       unit:String,
-       inSqft:{
-
-        type:String,
-        default:''
-       
-       }
-        
-
-    },
 
     description:{
         type:String,
