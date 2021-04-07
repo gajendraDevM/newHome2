@@ -20,7 +20,9 @@ exports.getsettingProperty = async (req, res)=>{
     try {
     
 const settings = await PropertySetting.find({})
-        
+
+ console.log(settings);
+
         res.status(201).json(settings)
 
     } catch (error) {

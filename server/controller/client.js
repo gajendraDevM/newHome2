@@ -6,8 +6,13 @@ exports.createClient = async (req, res)=>{
     
 
 
-       new Client(req.body).save()
+     const client =   new Client(req.body)
         
+client.bugjet_info.bugjet_price = req.body.bugjet_info.bugjet_price 
+client.bugjet_info.bugjet_unit = req.body.prefix
+
+await client.save()
+
         res.status(201).json({msg:"succefully client added"})
 
     } catch (error) {
@@ -22,7 +27,6 @@ exports.createClient = async (req, res)=>{
 exports.updateClient = async (req, res)=>{
     try {
 
-        console.log(req.body);
     
        await Client.updateOne({_id:req.params.id}, req.body);
 

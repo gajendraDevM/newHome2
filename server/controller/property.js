@@ -26,8 +26,6 @@ exports.createProperty = async (req, res)=>{
 exports.updateProperty = async (req, res)=>{
     try {
 
-        console.log(req.body);
-    
        await Property.updateOne({_id:req.params.id}, req.body);
 
         res.status(201).json({msg:"succefully Property updated"})
@@ -93,47 +91,58 @@ const property =  await Property.find({'property_type.property_catagory':filterw
 exports.getProprtybyFilter = async (req, res)=>{
 
 
-    let search = req.query.search
-    let filterword = req.query.filterword.toLowerCase().trim()
+    const search = req.query.filterword
 
+    const price1 = req.query.price1
+    const price2 = req.query.price2
+     const bhk = req.query.bhk
 
-
-    try {
-       let condition = `property_info.${filterword}`
+try {
  
-if(req.query.search) {
+if(search) {
+    
+
+    if(bhk){
 
 
-    if(filterword === 'ownership_type' 
-     || filterword === 'transection_type'
-     || filterword === 'furnished_status' 
-     || filterword === 'sale_type' 
-     || filterword === 'construction_status'
-     || filterword === 'property_catagory' ) {
+        if(price1) {
+
+       
+            const property = await Property.find({'property_type.client_catagory': search, 'property_info.bed_room': bhk, 
+             'property_info.project_price':{ $gte: price1, $lte: price2 } })
+    
+    
+        return res.status(201).json(property)
+            
+        }
+
+        const property = await Property.find({'property_type.client_catagory': search, 
+        'property_info.bed_room': bhk })
+
+ 
+
+   return res.status(201).json(property)
 
 
- const property =  await Property.find({[condition]: search})
-return res.status(201).json(property)
+    }
 
-     }
-
+ 
 
 
- const property =  await Property.find({ $and: [ {[condition]: { $lt: search }}, {[condition]: { $gt: (10 - search) }}  ]})
-
+    const property = await Property.find({'property_type.client_catagory': search})
     return res.status(201).json(property)
+
+
 
 }
 
+const property = await Property.find({})
 
-      const property =  await Property.find({});
+ res.status(201).json(property)
 
-        res.status(201).json(property)
-
-    } catch (error) {
-            res.status(401).json({msg:"somthing went Wrong !", error})
+} catch (error) {
     
-    }
+}
 
 }
 

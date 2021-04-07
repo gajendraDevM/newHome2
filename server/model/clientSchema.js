@@ -10,7 +10,22 @@ const clientSchema = new Schema({
         trim: true,
         required: [true, 'is required'],
     },
+    client_requirement : {
+       type: String,
+        
+    },
+    company_name: {
 
+        type: String,
+        trim: true,
+       default:'-'
+    },
+    client_id: {
+
+        type: String,
+        trim: true,
+        required: [true, 'is required'],
+    }, 
  phone_number:{
       type:String,
         trim:true,
@@ -30,6 +45,10 @@ const clientSchema = new Schema({
   other_phone:{
         type:[String]   
     },
+    other_emails : {
+
+  type:[String] 
+    },
     customer_type:{
 
         type:String,
@@ -37,7 +56,7 @@ const clientSchema = new Schema({
     },
      location:{
 
-        district:String,
+        locality:String,
        state:String
     },
     property_size: {
@@ -47,12 +66,20 @@ const clientSchema = new Schema({
         feet:String
         
     },
-    isFurnist:{
+    isfurnished:{
+        
+        type:String,
+        default:true
+    },
+    bugjet_info : {
+        bugjet_price:Number,
+        bugjet_unit:String,
+    },
+    comment:{
         
         type:String,
         default:true
     }
-   
  
 }, { timestamps: true })
 
