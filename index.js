@@ -11,6 +11,7 @@ const employee = require('./server/router/employee')
 const property = require('./server/router/property')
 const settingproperty = require('./server/router/settingProperty')
 const setting = require('./server/router/setting')
+const locality = require('./server/router/locality')
 
 
 
@@ -22,7 +23,7 @@ if (process.env.NODE_ENV === process.env.NODE_ENV) {
   }
 
 
-  mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
+  mongoose.connect(process.env.LOCAL_DB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
     console.log('mongodb connected sucessfully')
 })
 
@@ -36,6 +37,8 @@ app.use(cookieSession({
 
 
    app.use('/api', admin)
+   app.use('/api', locality )
+
    app.use('/api', client)
    app.use('/api', employee)
    app.use('/api', property)

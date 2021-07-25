@@ -17,13 +17,45 @@ exports.createEmployee = async (req, res)=>{
         res.status(201).json({msg:"succefully Employee added", employee})
 
     } catch (error) {
+
+        console.log(error);
             res.status(401).json({msg:"somthing went Wrong !", error})
     
     }
 
 }
 
+exports.addSalary= async (req, res) =>{
 
+
+    try {
+        
+   
+
+     
+        
+        Employee.findByIdAndUpdate(
+            req.params.id,
+            {$push: {"salary_info": {sallary_ammount: req.body.sallary}}},
+            {safe: true, upsert: true},
+            function(err, model) {
+                console.log(err);
+            }
+        );
+
+     
+      res.status(201).json({msg:"salary added succefully!"});
+      
+
+    } catch (error) {
+
+        console.log(error);
+               res.status(401).json({msg:"Somthing went wrong!"});
+
+    }
+
+
+}
 
 exports.updateEmployee = async (req, res)=>{
     try {
@@ -61,8 +93,9 @@ exports.getAllEmployees = async (req, res)=>{
 
 
     
-      const employee =  await Employee.find({});
+      const employee =  await Employee.find({}).populate('salary_info').exec();
 
+  
         res.status(201).json(employee)
 
     } catch (error) {

@@ -2,6 +2,20 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema
 
+let date = new Date()
+const sallarySchema = new Schema({
+
+    sallary_ammount: {
+        type:String,
+        default:'0'
+    },
+    date: {
+        type:Date,
+        default:date,
+    }
+}, { timestamps: true })
+
+module.exports = mongoose.model('Sallary', sallarySchema)
 const employeeSchema = new Schema({
 
     employee_name: {
@@ -18,8 +32,10 @@ const employeeSchema = new Schema({
     image: {
 
         type:String,
-        required:[true, "image is required"]
     },
+
+    salary:String,
+    salary_info:[sallarySchema],
 
     designation:{
         type:String,
@@ -30,12 +46,8 @@ const employeeSchema = new Schema({
         type:String,
         required:true
     },
-    sallary:{
-        type:String,
-        required:true
-    },
-
-
+    
+    
   phone_number:{
       type:String,
         trim:true,
@@ -50,7 +62,7 @@ const employeeSchema = new Schema({
 
     image_id:{
         type:String,
-        required:true,
+     
     },
     address:{
         type:String,

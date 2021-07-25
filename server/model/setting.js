@@ -16,6 +16,8 @@ const settingSchema = new Schema({
         required:[true,'is required']
     }
 
+ 
+
 
  
 }, { timestamps: true })

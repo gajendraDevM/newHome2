@@ -54,11 +54,7 @@ const clientSchema = new Schema({
         type:String,
         required:true
     },
-     location:{
-
-        locality:String,
-       state:String
-    },
+     location:[Array],
     property_size: {
 
         sqft: String,
