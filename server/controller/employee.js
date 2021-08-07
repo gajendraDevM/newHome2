@@ -19,6 +19,7 @@ exports.createEmployee = async (req, res)=>{
     } catch (error) {
 
         console.log(error);
+
             res.status(401).json({msg:"somthing went Wrong !", error})
     
     }
@@ -109,11 +110,13 @@ exports.getAllEmployees = async (req, res)=>{
 exports.getOneEmployee = async (req, res)=>{
     try {
     
-      const Employee =  await Employee.findOne({_id:req.params.id});
+      const employee =  await Employee.findOne({_id:req.params.id});
 
-        res.status(201).json(Employee)
+        res.status(201).json(employee)
 
     } catch (error) {
+
+        console.log(error);
             res.status(401).json({msg:"somthing went Wrong !"})
     
     }
